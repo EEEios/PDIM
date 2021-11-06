@@ -5,7 +5,9 @@ import io.netty.buffer.ByteBufAllocator;
 import protocol.Packet;
 import protocol.Command;
 import protocol.request.LoginRequestPacket;
+import protocol.request.MessageRequestPacket;
 import protocol.response.LoginResponsePacket;
+import protocol.response.MessageResponsePacket;
 import serialize.Serializer;
 import serialize.SerializerAlgorithm;
 import serialize.impl.JSONSerializer;
@@ -13,7 +15,6 @@ import serialize.impl.JSONSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO 构造工厂，形成配置链
 public class PacketCodec {
 
     private static final int MAGIC_NUMBER_LENGTH = 4;
@@ -31,14 +32,14 @@ public class PacketCodec {
         packetMap = new HashMap<>();
         packetMap.put(Command.LOGIN_REQUEST, LoginRequestPacket.class);
         packetMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
+        packetMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
+        packetMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
 
         serializerMap = new HashMap<>();
         serializerMap.put(SerializerAlgorithm.JSON, new JSONSerializer());
     }
 
-    public ByteBuf encode(ByteBufAllocator allocator, Packet packet) {
-
-        ByteBuf byteBuf = allocator.ioBuffer();
+    public ByteBuf encode(ByteBuf byteBuf, Packet packet) {
 
         byte[] bytes = Serializer.DEFAULT.serialize(packet);
 

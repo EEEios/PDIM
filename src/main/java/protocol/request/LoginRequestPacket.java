@@ -2,7 +2,8 @@ package protocol.request;
 
 import lombok.Data;
 import protocol.Packet;
-import protocol.Command;
+
+import static protocol.Command.LOGIN_REQUEST;
 
 @Data
 public class LoginRequestPacket extends Packet {
@@ -15,6 +16,6 @@ public class LoginRequestPacket extends Packet {
 
     @Override
     public Byte getCommand() {
-        return Command.LOGIN_REQUEST;
+        return LOGIN_REQUEST;
     }
 }

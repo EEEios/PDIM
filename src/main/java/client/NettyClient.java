@@ -1,15 +1,22 @@
 package client;
 
+import client.handler.LoginResponseHandler;
+import client.handler.MessageResponseHandler;
+import codec.handler.PacketDecoder;
+import codec.handler.PacketEncoder;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
+import protocol.request.MessageRequestPacket;
+import util.LoginUtil;
 
 import java.util.Date;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class NettyClient {
@@ -31,7 +38,11 @@ public class NettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) {
-                        socketChannel.pipeline().addLast(new ClientHandler());
+                        socketChannel.pipeline()
+                                .addLast(new PacketDecoder())
+                                .addLast(new LoginResponseHandler())
+                                .addLast(new MessageResponseHandler())
+                                .addLast(new PacketEncoder());
                     }
                 });
         connect(bootstrap, HOST, PORT, MAX_RETRY);
@@ -42,6 +53,9 @@ public class NettyClient {
                 .addListener(future -> {
                     if (future.isSuccess()) {
                         System.out.println(new Date() + "- 连接成功!");
+                        System.out.println(new Date() + "- 正在启动控制台输入线程...");
+                        Channel channel = ((ChannelFuture) future).channel();
+                        startConsoleThread(channel);
                     } else if (retry == 0) {
                         System.err.println(new Date() + "重新连接失败!");
                     } else {
@@ -52,5 +66,18 @@ public class NettyClient {
                                 .schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit.SECONDS);
                     }
                 });
+    }
+
+    private static void startConsoleThread(Channel channel) {
+        new Thread(() -> {
+            while (!Thread.interrupted()) {
+                if (LoginUtil.hasLogin(channel)) {
+                    System.out.println("* 输入消息：");
+                    Scanner sc = new Scanner(System.in);
+                    String line = sc.nextLine();
+                    channel.writeAndFlush(new MessageRequestPacket(line));
+                }
+            }
+        }).start();
     }
 }
