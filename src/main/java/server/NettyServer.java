@@ -1,22 +1,18 @@
 package server;
 
-import client.handler.LoginResponseHandler;
-import client.handler.MessageResponseHandler;
 import codec.handler.PacketDecoder;
 import codec.handler.PacketEncoder;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import server.handler.AuthHandler;
 import server.handler.LoginRequestHandler;
 import server.handler.MessageRequestHandler;
 
 import java.util.Date;
-
-import static jdk.nashorn.internal.objects.NativeFunction.bind;
 
 public class NettyServer {
 
@@ -39,6 +35,7 @@ public class NettyServer {
                         ch.pipeline()
                                 .addLast(new PacketDecoder())
                                 .addLast(new LoginRequestHandler())
+                                .addLast(new AuthHandler())
                                 .addLast(new MessageRequestHandler())
                                 .addLast(new PacketEncoder());
                     }

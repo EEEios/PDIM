@@ -13,7 +13,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import protocol.request.MessageRequestPacket;
-import util.LoginUtil;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -53,9 +52,6 @@ public class NettyClient {
                 .addListener(future -> {
                     if (future.isSuccess()) {
                         System.out.println(new Date() + "- 连接成功!");
-                        System.out.println(new Date() + "- 正在启动控制台输入线程...");
-                        Channel channel = ((ChannelFuture) future).channel();
-                        startConsoleThread(channel);
                     } else if (retry == 0) {
                         System.err.println(new Date() + "重新连接失败!");
                     } else {
@@ -68,16 +64,4 @@ public class NettyClient {
                 });
     }
 
-    private static void startConsoleThread(Channel channel) {
-        new Thread(() -> {
-            while (!Thread.interrupted()) {
-                if (LoginUtil.hasLogin(channel)) {
-                    System.out.println("* 输入消息：");
-                    Scanner sc = new Scanner(System.in);
-                    String line = sc.nextLine();
-                    channel.writeAndFlush(new MessageRequestPacket(line));
-                }
-            }
-        }).start();
-    }
 }
