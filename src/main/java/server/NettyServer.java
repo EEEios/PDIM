@@ -1,16 +1,19 @@
 package server;
 
+import client.handler.LoginResponseHandler;
+import client.handler.LogoutResponseHandler;
 import codec.handler.PacketDecoder;
 import codec.handler.PacketEncoder;
+import codec.handler.VerifyFrameDecoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import server.handler.AuthHandler;
 import server.handler.LoginRequestHandler;
+import server.handler.LogoutRequestHandler;
 import server.handler.MessageRequestHandler;
 
 import java.util.Date;
@@ -34,10 +37,11 @@ public class NettyServer {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ch.pipeline()
-                                .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4))
+                                .addLast(new VerifyFrameDecoder())
                                 .addLast(new PacketDecoder())
                                 .addLast(new LoginRequestHandler())
                                 .addLast(new AuthHandler())
+                                .addLast(new LogoutRequestHandler())
                                 .addLast(new MessageRequestHandler())
                                 .addLast(new PacketEncoder());
                     }

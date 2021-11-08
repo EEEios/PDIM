@@ -1,22 +1,19 @@
 package client;
 
 import client.handler.LoginResponseHandler;
+import client.handler.LogoutResponseHandler;
 import client.handler.MessageResponseHandler;
 import codec.handler.PacketDecoder;
 import codec.handler.PacketEncoder;
+import codec.handler.VerifyFrameDecoder;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import protocol.request.MessageRequestPacket;
 
 import java.util.Date;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class NettyClient {
@@ -39,9 +36,10 @@ public class NettyClient {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) {
                         socketChannel.pipeline()
-                                .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 7, 4))
+                                .addLast(new VerifyFrameDecoder())
                                 .addLast(new PacketDecoder())
                                 .addLast(new LoginResponseHandler())
+                                .addLast(new LogoutResponseHandler())
                                 .addLast(new MessageResponseHandler())
                                 .addLast(new PacketEncoder());
                     }
@@ -65,5 +63,6 @@ public class NettyClient {
                     }
                 });
     }
+
 
 }

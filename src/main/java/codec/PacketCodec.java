@@ -17,10 +17,10 @@ import java.util.Map;
 
 public class PacketCodec {
 
-    private static final int MAGIC_NUMBER_LENGTH = 4;
-    private static final int VERSION_LENGTH = 1;
+    public static final int MAGIC_NUMBER_LENGTH = 4;
+    public static final int VERSION_LENGTH = 1;
 
-    private static final int MAGIC_NUMBER = 0x4d3c2b1a;
+    public static final int MAGIC_NUMBER = 0x4d3c2b1a;
 
     public static final PacketCodec INSTANCE = new PacketCodec();
 

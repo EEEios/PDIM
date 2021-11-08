@@ -1,10 +1,10 @@
 package client.handler;
 
+import client.command.ConsoleCommandManager;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import protocol.request.LoginRequestPacket;
-import protocol.request.MessageRequestPacket;
 import protocol.response.LoginResponsePacket;
 
 import java.util.Date;
@@ -24,11 +24,12 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Scanner sc = new Scanner(System.in);
-        System.out.print("登录用户: ");
+        System.out.print("用户: ");
         String username = sc.nextLine();
-        System.out.print("登录密码: ");
+        System.out.print("密码: ");
         String password = sc.nextLine();
         LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
+
         loginRequestPacket.setUserId(UUID.randomUUID().toString());
         loginRequestPacket.setUsername(username);
         loginRequestPacket.setPassword(password);
@@ -53,13 +54,20 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
     }
 
 
+    /**
+     * 启动控制台线程
+     * @param channel
+     */
     private static void startConsoleThread(Channel channel) {
+        ConsoleCommandManager commandManager = new ConsoleCommandManager();
         new Thread(() -> {
             while (!Thread.interrupted()) {
-                System.out.println("* 输入消息：");
+                System.out.print("> ");
                 Scanner sc = new Scanner(System.in);
-                String line = sc.nextLine();
-                channel.writeAndFlush(new MessageRequestPacket(line));
+                String[] line = sc.nextLine().split("\\s");
+                if (line.length > 0) {
+                    commandManager.exec(line, channel);
+                }
             }
         }).start();
     }

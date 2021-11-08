@@ -11,6 +11,12 @@ public class PacketDecoder extends ByteToMessageDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-        out.add(PacketCodec.INSTANCE.decode(in));
+        Object o;
+        // 收到客户端断开请求时，会有 accept，但是缓冲区没有收到数据
+        if ((o = PacketCodec.INSTANCE.decode(in) ) != null) {
+            out.add(o);
+        } else {
+            ctx.channel().close();
+        }
     }
 }

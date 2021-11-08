@@ -8,6 +8,10 @@ import static protocol.Command.MESSAGE_RESPONSE;
 @Data
 public class MessageResponsePacket extends Packet {
 
+    private String fromUId;
+
+    private String fromUsername;
+
     private String message;
 
     @Override

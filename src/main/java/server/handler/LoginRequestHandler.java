@@ -5,13 +5,22 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import protocol.request.LoginRequestPacket;
 import protocol.response.LoginResponsePacket;
 import util.LoginUtil;
+import util.Session;
+import util.SessionUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * 接受客户端登录请求
  */
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
+
+    private final HashMap<String, String> map = new HashMap<String, String>(){{
+        put("user", "password");
+        put("123","123");
+    }};
+
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginRequestPacket loginRequestPacket) throws Exception {
@@ -20,14 +29,17 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
 
         String username = loginRequestPacket.getUsername();
         String password = loginRequestPacket.getPassword();
-        if ("user".equals(username) && "password".equals(password)) {
+        if (map.containsKey(username) && map.get(username).equals(password)) {
             responsePacket.setSuccess(true);
-            System.out.println(new Date() + "- 用户登录成功 username [" + username +"]");
+            System.out.println(new Date() + "- 用户登录成功 用户名： [" + username +"]");
             responsePacket.setReason("登录成功");
             LoginUtil.markAsLogin(ctx.channel());
+
+            // UUID 绑定到 Channel 上
+            SessionUtil.bindSession(new Session(loginRequestPacket.getUserId(), username), ctx.channel());
         } else {
             responsePacket.setSuccess(true);
-            System.out.println(new Date() + "- 用户身份校验失败 username [" + username +"]");
+            System.out.println(new Date() + "- 用户身份校验失败 用户名： [" + username +"]");
             responsePacket.setReason("用于校验失败");
         }
 
