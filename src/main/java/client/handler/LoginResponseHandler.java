@@ -62,7 +62,6 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
         ConsoleCommandManager commandManager = new ConsoleCommandManager();
         new Thread(() -> {
             while (!Thread.interrupted()) {
-                System.out.print("> ");
                 Scanner sc = new Scanner(System.in);
                 String[] line = sc.nextLine().split("\\s");
                 if (line.length > 0) {

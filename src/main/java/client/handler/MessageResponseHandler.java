@@ -11,7 +11,7 @@ public class MessageResponseHandler extends SimpleChannelInboundHandler<MessageR
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageResponsePacket messageResponsePacket) throws Exception {
 
-        if (messageResponsePacket.getFromUId() == null) {
+        if (messageResponsePacket.getFromUsername() == null) {
             System.out.println(new Date() + "- 服务端响应：" + messageResponsePacket.getMessage());
         } else {
             System.out.println(new Date() + "- 收到用户 [" +

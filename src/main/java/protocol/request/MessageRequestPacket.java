@@ -14,9 +14,11 @@ public class MessageRequestPacket extends Packet {
         this.msg = msg;
     }
 
+    private String toUId;
+
     private String msg;
 
-    private String toUId;
+    private String toUsername;
 
     @Override
     public Byte getCommand() {

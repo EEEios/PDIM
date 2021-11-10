@@ -15,7 +15,7 @@ public class AbstractCommandHandler implements CommandHandler{
 
     @Override
     public void exec(String[] strings, Channel channel) {
-        if (strings.length != 0 && strings.length != ARGS_NUMS) {
+        if (ARGS_NUMS != 0 && strings.length != ARGS_NUMS) {
             System.out.println("- 命令参数错误");
         }
         execHandler(strings, channel);

@@ -14,7 +14,7 @@ public class ConsoleCommandManager {
     public ConsoleCommandManager() {
         this.handlerMap = new HashMap<>();
         handlerMap.put("logout", new LogoutCommandHandler(1));
-        handlerMap.put("send", new SendCommandHandler(0));
+        handlerMap.put("send", new SendCommandHandler(3));
     }
 
     public void exec(String[] strings, Channel channel) {

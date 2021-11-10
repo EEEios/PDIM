@@ -4,7 +4,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import protocol.request.LoginRequestPacket;
 import protocol.response.LoginResponsePacket;
-import util.LoginUtil;
 import util.Session;
 import util.SessionUtil;
 
@@ -17,7 +16,7 @@ import java.util.HashMap;
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
 
     private final HashMap<String, String> map = new HashMap<String, String>(){{
-        put("user", "password");
+        put("root", "root");
         put("123","123");
     }};
 
@@ -33,7 +32,9 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
             responsePacket.setSuccess(true);
             System.out.println(new Date() + "- 用户登录成功 用户名： [" + username +"]");
             responsePacket.setReason("登录成功");
-            LoginUtil.markAsLogin(ctx.channel());
+
+            // 设置登录标志位
+            SessionUtil.markAsLogin(ctx.channel());
 
             // UUID 绑定到 Channel 上
             SessionUtil.bindSession(new Session(loginRequestPacket.getUserId(), username), ctx.channel());
