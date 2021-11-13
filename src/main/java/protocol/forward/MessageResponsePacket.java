@@ -1,4 +1,4 @@
-package protocol.response;
+package protocol.forward;
 
 import lombok.Data;
 import protocol.Packet;

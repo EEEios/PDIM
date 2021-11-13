@@ -3,6 +3,7 @@ package client;
 import client.handler.LoginResponseHandler;
 import client.handler.LogoutResponseHandler;
 import client.handler.MessageResponseHandler;
+import client.handler.ResponseHandler;
 import codec.handler.PacketDecoder;
 import codec.handler.PacketEncoder;
 import codec.handler.VerifyFrameDecoder;
@@ -39,7 +40,7 @@ public class NettyClient {
                                 .addLast(new VerifyFrameDecoder())
                                 .addLast(new PacketDecoder())
                                 .addLast(new LoginResponseHandler())
-                                .addLast(new LogoutResponseHandler())
+                                .addLast(new ResponseHandler())
                                 .addLast(new MessageResponseHandler())
                                 .addLast(new PacketEncoder());
                     }

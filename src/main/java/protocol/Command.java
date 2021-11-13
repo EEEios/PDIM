@@ -16,4 +16,6 @@ public interface Command {
 
     Byte RESPONSE = 7;
 
+    Byte ENTER_GROUP = 8;
+
 }

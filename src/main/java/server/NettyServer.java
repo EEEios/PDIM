@@ -11,10 +11,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import server.handler.AuthHandler;
-import server.handler.LoginRequestHandler;
-import server.handler.LogoutRequestHandler;
-import server.handler.MessageRequestHandler;
+import server.handler.*;
 
 import java.util.Date;
 
@@ -41,8 +38,9 @@ public class NettyServer {
                                 .addLast(new PacketDecoder())
                                 .addLast(new LoginRequestHandler())
                                 .addLast(new AuthHandler())
-                                .addLast(new LogoutRequestHandler())
                                 .addLast(new MessageRequestHandler())
+                                .addLast(new EnterGroupRequestHandler())
+                                .addLast(new LogoutRequestHandler())
                                 .addLast(new PacketEncoder());
                     }
                 });

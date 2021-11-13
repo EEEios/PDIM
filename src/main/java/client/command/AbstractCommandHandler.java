@@ -9,8 +9,6 @@ public class AbstractCommandHandler implements CommandHandler{
      */
     protected int ARGS_NUMS;
 
-    public AbstractCommandHandler(){}
-
     public AbstractCommandHandler(int ARGS_NUMS) {
         this.ARGS_NUMS = ARGS_NUMS;
     }
@@ -24,8 +22,10 @@ public class AbstractCommandHandler implements CommandHandler{
     public final void exec(String[] strings, Channel channel) {
         if (ARGS_NUMS != 0 && strings.length != ARGS_NUMS) {
             System.out.println("- 命令参数错误");
+        } else {
+            execHandler(strings, channel);
         }
-        execHandler(strings, channel);
+
     }
 
     public void execHandler(String[] strings, Channel channel){}

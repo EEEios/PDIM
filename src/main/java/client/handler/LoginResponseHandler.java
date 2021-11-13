@@ -75,5 +75,6 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println(new Date() + "- 客户端链接被断开");
+        System.exit(0);
     }
 }

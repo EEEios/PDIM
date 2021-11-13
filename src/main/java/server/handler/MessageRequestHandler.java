@@ -4,7 +4,7 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import protocol.request.MessageRequestPacket;
-import protocol.response.MessageResponsePacket;
+import protocol.forward.MessageResponsePacket;
 import util.Session;
 import util.SessionUtil;
 

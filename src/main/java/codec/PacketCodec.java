@@ -1,13 +1,14 @@
 package codec;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
 import protocol.Packet;
 import protocol.Command;
+import protocol.request.EnterGroupRequestPacket;
 import protocol.request.LoginRequestPacket;
 import protocol.request.MessageRequestPacket;
 import protocol.response.LoginResponsePacket;
-import protocol.response.MessageResponsePacket;
+import protocol.forward.MessageResponsePacket;
+import protocol.response.ResponsePacket;
 import serialize.Serializer;
 import serialize.SerializerAlgorithm;
 import serialize.impl.JSONSerializer;
@@ -29,11 +30,14 @@ public class PacketCodec {
     private final Map<Byte, Serializer> serializerMap;
 
     public PacketCodec() {
+        // TODO 命令解析
         packetMap = new HashMap<>();
         packetMap.put(Command.LOGIN_REQUEST, LoginRequestPacket.class);
         packetMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
         packetMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
         packetMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
+        packetMap.put(Command.ENTER_GROUP, EnterGroupRequestPacket.class);
+        packetMap.put(Command.RESPONSE, ResponsePacket.class);
 
         serializerMap = new HashMap<>();
         serializerMap.put(SerializerAlgorithm.JSON, new JSONSerializer());
