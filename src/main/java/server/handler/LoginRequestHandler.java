@@ -42,6 +42,7 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
             responsePacket.setSuccess(true);
             System.out.println(new Date() + "- 用户身份校验失败 用户名： [" + username +"]");
             responsePacket.setReason("用于校验失败");
+            ctx.channel().close();
         }
 
         ctx.channel().writeAndFlush(responsePacket);
