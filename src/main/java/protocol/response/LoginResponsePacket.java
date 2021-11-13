@@ -3,7 +3,7 @@ package protocol.response;
 import lombok.Data;
 import protocol.Packet;
 
-import static protocol.Command.LOGIN_RESPONSE;
+import static client.command.Command.LOGIN_RESPONSE;
 
 @Data
 public class LoginResponsePacket extends Packet {

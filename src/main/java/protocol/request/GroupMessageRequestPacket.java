@@ -4,24 +4,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import protocol.Packet;
 
-import static client.command.Command.MESSAGE_REQUEST;
+import static client.command.Command.GROUP_MESSAGE;
 
 @Data
 @NoArgsConstructor
-public class MessageRequestPacket extends Packet {
+public class GroupMessageRequestPacket extends Packet {
 
-    public MessageRequestPacket(String msg) {
+    public GroupMessageRequestPacket(String msg) {
         this.msg = msg;
     }
 
-    private String toUId;
+    private String toGroup;
 
     private String msg;
 
-    private String toUsername;
-
     @Override
     public Byte getCommand() {
-        return MESSAGE_REQUEST;
+        return GROUP_MESSAGE;
     }
 }

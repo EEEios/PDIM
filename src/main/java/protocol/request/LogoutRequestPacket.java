@@ -1,6 +1,6 @@
 package protocol.request;
 
-import protocol.Command;
+import client.command.Command;
 import protocol.Packet;
 
 public class LogoutRequestPacket extends Packet {

@@ -8,18 +8,22 @@
 
 ## 指令
 
-| 指令                      | 功能     |
-| ------------------------- | -------- |
-| Logout                    | 退出登录 |
-| send <username> <message> | 发送消息 |
-| eng <groupname>           | 加入群聊 |
+| 指令                      | 功能           |
+| ------------------------- | -------------- |
+| Logout                    | 退出登录       |
+| send <username> <message> | 发送消息       |
+| eng <groupname>           | 加入群聊       |
+| sendg <groupname>         | 向群组发送消息 |
 
 
 
 ## 创建新命令流程
 
 1. Commend 添加指令
-2. 创建对应包
-3. 在 PacketCodec 中加入解析
-4. 创建命令处理器
-5. 创建请求/响应处理器
+2. 在 ConsoleCommandManager 当中添加配置
+3. 创建对应 Packet
+4. 在 PacketCodec 中加入解析
+5. 创建 commandHandler
+6. 创建请求/响应 handler
+7. 将 handler 加入到 eventLoopGroup 中
+

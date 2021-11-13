@@ -3,13 +3,13 @@ package protocol.response;
 import lombok.Data;
 import protocol.Packet;
 
-import static protocol.Command.RESPONSE;
+import static client.command.Command.RESPONSE;
 
 @Data
 public class ResponsePacket extends Packet {
     private boolean success;
 
-    private String reason;
+    private String message;
 
     @Override
     public Byte getCommand() {

@@ -3,7 +3,7 @@ package protocol.request;
 import lombok.Data;
 import protocol.Packet;
 
-import static protocol.Command.ENTER_GROUP;
+import static client.command.Command.ENTER_GROUP;
 
 @Data
 public class EnterGroupRequestPacket extends Packet {

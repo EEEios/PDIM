@@ -1,7 +1,7 @@
 package protocol.response;
 
 import lombok.Data;
-import protocol.Command;
+import client.command.Command;
 import protocol.Packet;
 
 @Data

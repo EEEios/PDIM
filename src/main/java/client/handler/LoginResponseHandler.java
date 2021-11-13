@@ -45,12 +45,11 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginResponsePacket loginResponsePacket) throws Exception {
         if (loginResponsePacket.isSuccess()) {
-            System.out.println(new Date() + "- 客户端登录成功");
-            System.out.println(new Date() + "- 正在启动控制台输入线程...");
+            System.out.println(new Date() + "- 登录成功");
             startConsoleThread(ctx.channel());
-            System.out.println(new Date() + "- 启动成功, 输入指令即可使用: ");
+            System.out.println(new Date() + "- 控制台启动成功, 输入指令即可使用: ");
         } else {
-            System.out.println(new Date() + "- 客户端登录失败，原因：" + loginResponsePacket.getReason());
+            System.out.println(new Date() + "- 登录失败，原因：" + loginResponsePacket.getReason());
         }
     }
 

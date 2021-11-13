@@ -3,7 +3,7 @@ package protocol.forward;
 import lombok.Data;
 import protocol.Packet;
 
-import static protocol.Command.MESSAGE_RESPONSE;
+import static client.command.Command.MESSAGE_RESPONSE;
 
 @Data
 public class MessageResponsePacket extends Packet {

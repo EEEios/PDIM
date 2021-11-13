@@ -1,13 +1,11 @@
 package codec;
 
+import client.command.Command;
 import io.netty.buffer.ByteBuf;
 import protocol.Packet;
-import protocol.Command;
-import protocol.request.EnterGroupRequestPacket;
-import protocol.request.LoginRequestPacket;
-import protocol.request.MessageRequestPacket;
+import protocol.request.*;
 import protocol.response.LoginResponsePacket;
-import protocol.forward.MessageResponsePacket;
+import protocol.response.LogoutResponsePacket;
 import protocol.response.ResponsePacket;
 import serialize.Serializer;
 import serialize.SerializerAlgorithm;
@@ -35,10 +33,12 @@ public class PacketCodec {
         packetMap.put(Command.LOGIN_REQUEST, LoginRequestPacket.class);
         packetMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
         packetMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
-        packetMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
+//        packetMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
         packetMap.put(Command.ENTER_GROUP, EnterGroupRequestPacket.class);
         packetMap.put(Command.RESPONSE, ResponsePacket.class);
-
+        packetMap.put(Command.GROUP_MESSAGE, GroupMessageRequestPacket.class);
+        packetMap.put(Command.LOGOUT_REQUEST, LogoutRequestPacket.class);
+        packetMap.put(Command.LOGOUT_RESPONSE, LogoutResponsePacket.class);
         serializerMap = new HashMap<>();
         serializerMap.put(SerializerAlgorithm.JSON, new JSONSerializer());
     }

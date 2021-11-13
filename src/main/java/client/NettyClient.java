@@ -2,7 +2,6 @@ package client;
 
 import client.handler.LoginResponseHandler;
 import client.handler.LogoutResponseHandler;
-import client.handler.MessageResponseHandler;
 import client.handler.ResponseHandler;
 import codec.handler.PacketDecoder;
 import codec.handler.PacketEncoder;
@@ -41,7 +40,8 @@ public class NettyClient {
                                 .addLast(new PacketDecoder())
                                 .addLast(new LoginResponseHandler())
                                 .addLast(new ResponseHandler())
-                                .addLast(new MessageResponseHandler())
+                                .addLast(new LogoutResponseHandler())
+//                                .addLast(new MessageResponseHandler())
                                 .addLast(new PacketEncoder());
                     }
                 });
@@ -52,7 +52,7 @@ public class NettyClient {
         bootstrap.connect(host, port)
                 .addListener(future -> {
                     if (future.isSuccess()) {
-                        System.out.println(new Date() + "- 连接成功!");
+//                        System.out.println(new Date() + "- 连接成功!");
                     } else if (retry == 0) {
                         System.err.println(new Date() + "重新连接失败!");
                     } else {

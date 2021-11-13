@@ -1,4 +1,4 @@
-package protocol;
+package client.command;
 
 public interface Command {
 
@@ -18,4 +18,5 @@ public interface Command {
 
     Byte ENTER_GROUP = 8;
 
+    Byte GROUP_MESSAGE = 9;
 }
