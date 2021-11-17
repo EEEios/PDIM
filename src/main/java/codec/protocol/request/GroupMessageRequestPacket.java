@@ -1,13 +1,14 @@
-package protocol.request;
+package codec.protocol.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import protocol.Packet;
+import codec.protocol.Packet;
 
-import static client.command.Command.GROUP_MESSAGE;
+import static codec.protocol.Command.GROUP_MESSAGE;
 
 @Data
 @NoArgsConstructor
+@codec.Packet(GROUP_MESSAGE)
 public class GroupMessageRequestPacket extends Packet {
 
     public GroupMessageRequestPacket(String msg) {

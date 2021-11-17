@@ -2,8 +2,8 @@ package server.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import protocol.request.LogoutRequestPacket;
-import protocol.response.LogoutResponsePacket;
+import codec.protocol.request.LogoutRequestPacket;
+import codec.protocol.response.LogoutResponsePacket;
 import util.SessionUtil;
 
 public class LogoutRequestHandler extends SimpleChannelInboundHandler<LogoutRequestPacket> {

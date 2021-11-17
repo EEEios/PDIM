@@ -1,11 +1,12 @@
-package protocol.request;
+package codec.protocol.request;
 
 import lombok.Data;
-import protocol.Packet;
+import codec.protocol.Packet;
 
-import static client.command.Command.ENTER_GROUP;
+import static codec.protocol.Command.ENTER_GROUP;
 
 @Data
+@codec.Packet(ENTER_GROUP)
 public class EnterGroupRequestPacket extends Packet {
 
     private String groupName;

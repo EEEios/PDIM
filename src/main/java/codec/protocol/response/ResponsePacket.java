@@ -1,11 +1,12 @@
-package protocol.response;
+package codec.protocol.response;
 
 import lombok.Data;
-import protocol.Packet;
+import codec.protocol.Command;
+import codec.protocol.Packet;
 
-import static client.command.Command.RESPONSE;
 
 @Data
+@codec.Packet(Command.RESPONSE)
 public class ResponsePacket extends Packet {
     private boolean success;
 
@@ -13,6 +14,6 @@ public class ResponsePacket extends Packet {
 
     @Override
     public Byte getCommand() {
-        return RESPONSE;
+        return Command.RESPONSE;
     }
 }

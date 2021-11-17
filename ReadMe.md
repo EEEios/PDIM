@@ -14,16 +14,29 @@
 | send <username> <message> | 发送消息       |
 | eng <groupname>           | 加入群聊       |
 | sendg <groupname>         | 向群组发送消息 |
+| exg <groupname>           | 退出群聊       |
 
 
 
 ## 创建新命令流程
 
 1. Commend 添加指令
-2. 在 ConsoleCommandManager 当中添加配置
-3. 创建对应 Packet
-4. 在 PacketCodec 中加入解析
-5. 创建 commandHandler
+2. 创建对应 Packet
+3. 创建 commandHandler
+4. 在 ConsoleCommandManager 当中添加配置
+5. 在 PacketCodec 中加入解析
 6. 创建请求/响应 handler
 7. 将 handler 加入到 eventLoopGroup 中
+
+
+
+# 自定义注解 & 被注解类扫描
+
+```Xml
+<dependency>
+    <groupId>org.reflections</groupId>
+    <artifactId>reflections</artifactId>
+    <version>0.9.10</version>
+</dependency>
+```
 

@@ -2,8 +2,8 @@ package server.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import protocol.request.LoginRequestPacket;
-import protocol.response.LoginResponsePacket;
+import codec.protocol.request.LoginRequestPacket;
+import codec.protocol.response.LoginResponsePacket;
 import util.Session;
 import util.SessionUtil;
 

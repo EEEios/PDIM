@@ -1,4 +1,4 @@
-package protocol;
+package codec.protocol;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;

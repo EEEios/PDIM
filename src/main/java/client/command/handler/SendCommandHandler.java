@@ -2,7 +2,7 @@ package client.command.handler;
 
 import client.command.AbstractCommandHandler;
 import io.netty.channel.Channel;
-import protocol.request.MessageRequestPacket;
+import codec.protocol.request.MessageRequestPacket;
 
 public class SendCommandHandler extends AbstractCommandHandler {
 

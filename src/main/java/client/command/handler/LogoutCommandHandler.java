@@ -2,7 +2,7 @@ package client.command.handler;
 
 import client.command.AbstractCommandHandler;
 import io.netty.channel.Channel;
-import protocol.request.LogoutRequestPacket;
+import codec.protocol.request.LogoutRequestPacket;
 
 public class LogoutCommandHandler extends AbstractCommandHandler {
 

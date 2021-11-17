@@ -4,8 +4,8 @@ import client.command.ConsoleCommandManager;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import protocol.request.LoginRequestPacket;
-import protocol.response.LoginResponsePacket;
+import codec.protocol.request.LoginRequestPacket;
+import codec.protocol.response.LoginResponsePacket;
 
 import java.util.Date;
 import java.util.Scanner;

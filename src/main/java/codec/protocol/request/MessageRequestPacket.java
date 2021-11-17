@@ -1,14 +1,16 @@
-package protocol.request;
+package codec.protocol.request;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import protocol.Packet;
+import codec.protocol.Packet;
 
-import static client.command.Command.MESSAGE_REQUEST;
+import static codec.protocol.Command.MESSAGE_REQUEST;
 
 @Data
-@NoArgsConstructor
+@codec.Packet(MESSAGE_REQUEST)
 public class MessageRequestPacket extends Packet {
+
+    public MessageRequestPacket() {
+    }
 
     public MessageRequestPacket(String msg) {
         this.msg = msg;

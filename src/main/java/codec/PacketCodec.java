@@ -1,18 +1,21 @@
 package codec;
 
-import client.command.Command;
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
+import org.reflections.Reflections;
+import codec.protocol.Command;
 import io.netty.buffer.ByteBuf;
-import protocol.Packet;
-import protocol.request.*;
-import protocol.response.LoginResponsePacket;
-import protocol.response.LogoutResponsePacket;
-import protocol.response.ResponsePacket;
+import codec.protocol.Packet;
+import codec.protocol.request.*;
+import codec.protocol.response.LoginResponsePacket;
+import codec.protocol.response.LogoutResponsePacket;
+import codec.protocol.response.ResponsePacket;
 import serialize.Serializer;
 import serialize.SerializerAlgorithm;
 import serialize.impl.JSONSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class PacketCodec {
 
@@ -28,20 +31,26 @@ public class PacketCodec {
     private final Map<Byte, Serializer> serializerMap;
 
     public PacketCodec() {
-        // TODO 命令解析
         packetMap = new HashMap<>();
-        packetMap.put(Command.LOGIN_REQUEST, LoginRequestPacket.class);
-        packetMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
-        packetMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
-//        packetMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
-        packetMap.put(Command.ENTER_GROUP, EnterGroupRequestPacket.class);
-        packetMap.put(Command.RESPONSE, ResponsePacket.class);
-        packetMap.put(Command.GROUP_MESSAGE, GroupMessageRequestPacket.class);
-        packetMap.put(Command.LOGOUT_REQUEST, LogoutRequestPacket.class);
-        packetMap.put(Command.LOGOUT_RESPONSE, LogoutResponsePacket.class);
+//        packetMap.put(Command.LOGIN_REQUEST, LoginRequestPacket.class);
+//        packetMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
+//        packetMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
+//        packetMap.put(Command.ENTER_GROUP, EnterGroupRequestPacket.class);
+//        packetMap.put(Command.RESPONSE, ResponsePacket.class);
+//        packetMap.put(Command.GROUP_MESSAGE, GroupMessageRequestPacket.class);
+//        packetMap.put(Command.LOGOUT_REQUEST, LogoutRequestPacket.class);
+//        packetMap.put(Command.LOGOUT_RESPONSE, LogoutResponsePacket.class);
+//        packetMap.put(Command.EXIT_GROUP, ExitGroupRequestPacket.class);
         serializerMap = new HashMap<>();
         serializerMap.put(SerializerAlgorithm.JSON, new JSONSerializer());
+
+        Reflections reflections = new Reflections(this.getClass().getPackage().getName() + ".protocol");
+        Set<Class<?>> packets = reflections.getTypesAnnotatedWith(codec.Packet.class);
+        for (Class<?> pClazz : packets) {
+            packetMap.put(pClazz.getAnnotation(codec.Packet.class).value(), (Class<? extends Packet>) pClazz);
+        }
     }
+
 
     public ByteBuf encode(ByteBuf byteBuf, Packet packet) {
 

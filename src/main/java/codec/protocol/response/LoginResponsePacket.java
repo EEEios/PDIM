@@ -1,11 +1,12 @@
-package protocol.response;
+package codec.protocol.response;
 
 import lombok.Data;
-import protocol.Packet;
+import codec.protocol.Packet;
 
-import static client.command.Command.LOGIN_RESPONSE;
+import static codec.protocol.Command.LOGIN_RESPONSE;
 
 @Data
+@codec.Packet(LOGIN_RESPONSE)
 public class LoginResponsePacket extends Packet {
 
     private boolean success;

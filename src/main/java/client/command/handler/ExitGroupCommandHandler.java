@@ -2,17 +2,17 @@ package client.command.handler;
 
 import client.command.AbstractCommandHandler;
 import io.netty.channel.Channel;
-import codec.protocol.request.EnterGroupRequestPacket;
+import codec.protocol.request.ExitGroupRequestPacket;
 
-public class EnterGroupCommandHandler extends AbstractCommandHandler {
+public class ExitGroupCommandHandler extends AbstractCommandHandler {
 
-    public EnterGroupCommandHandler(int ARGS_NUMS) {
+    public ExitGroupCommandHandler(int ARGS_NUMS) {
         super(ARGS_NUMS);
     }
 
     @Override
     public void execHandler(String[] strings, Channel channel) {
-        EnterGroupRequestPacket packet = new EnterGroupRequestPacket();
+        ExitGroupRequestPacket packet = new ExitGroupRequestPacket();
         packet.setGroupName(strings[1]);
         channel.writeAndFlush(packet);
     }

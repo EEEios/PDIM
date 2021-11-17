@@ -41,7 +41,6 @@ public class NettyClient {
                                 .addLast(new LoginResponseHandler())
                                 .addLast(new ResponseHandler())
                                 .addLast(new LogoutResponseHandler())
-//                                .addLast(new MessageResponseHandler())
                                 .addLast(new PacketEncoder());
                     }
                 });

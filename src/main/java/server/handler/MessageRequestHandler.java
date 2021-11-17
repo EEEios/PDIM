@@ -3,8 +3,8 @@ package server.handler;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import protocol.request.MessageRequestPacket;
-import protocol.response.ResponsePacket;
+import codec.protocol.request.MessageRequestPacket;
+import codec.protocol.response.ResponsePacket;
 import util.Session;
 import util.SessionUtil;
 

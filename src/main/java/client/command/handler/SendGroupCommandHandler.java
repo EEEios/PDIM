@@ -2,8 +2,7 @@ package client.command.handler;
 
 import client.command.AbstractCommandHandler;
 import io.netty.channel.Channel;
-import protocol.request.GroupMessageRequestPacket;
-import protocol.request.MessageRequestPacket;
+import codec.protocol.request.GroupMessageRequestPacket;
 
 public class SendGroupCommandHandler extends AbstractCommandHandler {
 

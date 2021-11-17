@@ -1,8 +1,9 @@
-package protocol.request;
+package codec.protocol.request;
 
-import client.command.Command;
-import protocol.Packet;
+import codec.protocol.Command;
+import codec.protocol.Packet;
 
+@codec.Packet(Command.LOGOUT_REQUEST)
 public class LogoutRequestPacket extends Packet {
 
     @Override

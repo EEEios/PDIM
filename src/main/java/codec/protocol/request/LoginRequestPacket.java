@@ -1,11 +1,12 @@
-package protocol.request;
+package codec.protocol.request;
 
 import lombok.Data;
-import protocol.Packet;
+import codec.protocol.Packet;
 
-import static client.command.Command.LOGIN_REQUEST;
+import static codec.protocol.Command.LOGIN_REQUEST;
 
 @Data
+@codec.Packet(LOGIN_REQUEST)
 public class LoginRequestPacket extends Packet {
 
     private String userId;

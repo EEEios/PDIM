@@ -1,10 +1,8 @@
 package client.command;
 
-import client.command.handler.EnterGroupCommandHandler;
-import client.command.handler.LogoutCommandHandler;
-import client.command.handler.SendCommandHandler;
-import client.command.handler.SendGroupCommandHandler;
+import client.command.handler.*;
 import io.netty.channel.Channel;
+import server.handler.ExitGroupRequestHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +17,7 @@ public class ConsoleCommandManager {
         handlerMap.put("send", new SendCommandHandler(3));
         handlerMap.put("eng", new EnterGroupCommandHandler(2));
         handlerMap.put("sendg", new SendGroupCommandHandler(3));
+        handlerMap.put("exg", new ExitGroupCommandHandler(2));
     }
 
     public void exec(String[] strings, Channel channel) {

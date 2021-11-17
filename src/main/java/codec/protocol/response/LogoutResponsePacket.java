@@ -1,10 +1,11 @@
-package protocol.response;
+package codec.protocol.response;
 
 import lombok.Data;
-import client.command.Command;
-import protocol.Packet;
+import codec.protocol.Command;
+import codec.protocol.Packet;
 
 @Data
+@codec.Packet(Command.LOGOUT_RESPONSE)
 public class LogoutResponsePacket extends Packet {
 
     private boolean success;

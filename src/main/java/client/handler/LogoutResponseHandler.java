@@ -2,7 +2,7 @@ package client.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import protocol.response.LogoutResponsePacket;
+import codec.protocol.response.LogoutResponsePacket;
 
 import java.util.Date;
 
