@@ -10,7 +10,7 @@
 
 | 指令                      | 功能           |
 | ------------------------- | -------------- |
-| Logout                    | 退出登录       |
+| logout                    | 退出登录       |
 | send <username> <message> | 发送消息       |
 | eng <groupname>           | 加入群聊       |
 | sendg <groupname>         | 向群组发送消息 |
